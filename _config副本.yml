@@ -1,7 +1,7 @@
 # Site settings
 title: cici Blog
 SEOTitle: cici的博客 | cici Blog
-header-img: img/home-bg.jpg
+header-img: img/home-bg.jpeg
 email: cicistream@outlook.com
 description: "关于我自己 日常与记录，热情与爱 | 任梦溪，Web & Mobile Lover，Software Engineer | 这里是 @cicistream 的个人博客，与你一起发现更大的世界。"
 keyword: "任梦溪, cicistream, cici, 前端, cicistream@outloo.com, @cicistream, 任梦溪的博客, cici Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
@@ -39,7 +39,6 @@ anchorjs: true                          # if you want to customize anchor. check
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
 plugins: [jekyll-paginate]
-
 
 
 # Markdown settings
