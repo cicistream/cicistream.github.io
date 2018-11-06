@@ -1,7 +1,7 @@
 # Site settings
 title: cici Blog
 SEOTitle: cici的博客 | cici Blog
-header-img: img/home-bg.jpeg
+header-img: img/home-bg.jpg
 email: cicistream@outlook.com
 description: "关于我自己 日常与记录，热情与爱 | 任梦溪，Web & Mobile Lover，Software Engineer | 这里是 @cicistream 的个人博客，与你一起发现更大的世界。"
 keyword: "任梦溪, cicistream, cici, 前端, cicistream@outloo.com, @cicistream, 任梦溪的博客, cici Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
@@ -13,10 +13,10 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:     cicistream
-zhihu_username:     cicistream
-github_username:    cicistream
-twitter_username:   cicistream
+weibo_username:     huxpro
+zhihu_username:     huxpro
+github_username:    huxpro
+twitter_username:   huxpro
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
 
@@ -41,6 +41,7 @@ anchorjs: true                          # if you want to customize anchor. check
 plugins: [jekyll-paginate]
 
 
+
 # Markdown settings
 # replace redcarpet to kramdown,
 # although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
@@ -58,7 +59,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: cici
+disqus_username: hux
 
 # Netease settings
 netease_comment: false
@@ -78,7 +79,7 @@ ga_domain: huangxuan.me
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "For the next quantum leap<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/header.png      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -105,22 +106,34 @@ friends: [
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-        title: "前端收藏夹",
-        href: "http://collect.w3ctrain.com/"
+        title: "乱序",
+        href: "http://mida.re/"
     },{
-        title: "阮一峰的个人网站",
-        href: "http://www.ruanyifeng.com/home.html"
+        title: "前端外刊评论",
+        href: "http://qianduan.guru/"
     },{
-        title: "张鑫旭的博客",
-        href: "https://www.zhangxinxu.com/"
+        title: "天镶的博客",
+        href: "http://lingyu.wang/"
     },{
-        title: "Smashing-Magazine",
-        href: "https://www.smashingmagazine.com/"
+        title: "Luke 的自留地",
+        href: "http://hmqk1995.github.io"
     },{
-        title: "掘金",
-        href: "https://juejin.im/"
+        title: "Ebn's Blog",
+        href: "http://ebnbin.com/"
     },{
-        title: "segmentfault",
-        href: "https://segmentfault.com/"
+        title: "SmdCn's Blog",
+        href: "http://blog.smdcn.net"
+    },{
+        title: "David's Game",
+        href: "https://www.ruoyaowu.com/"
+    },{
+        title: "DHong Say",
+        href: "http://dhong.co"
+    },{
+        title: "尹峰以为",
+        href: "http://ingf.github.io/"
+    },{
+        title: "解旻的博客",
+        href: "http://xieminis.me/"
     }
 ]
