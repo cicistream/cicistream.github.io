@@ -5,8 +5,8 @@
     <description>关于我自己 日常与记录，热情与爱 | 任梦溪，Web &amp; Mobile Lover，Software Engineer | 这里是 @cicistream 的个人博客，与你一起发现更大的世界。</description>
     <link>https://cicistream.me/</link>
     <atom:link href="https://cicistream.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 06 Nov 2018 15:29:02 +0800</pubDate>
-    <lastBuildDate>Tue, 06 Nov 2018 15:29:02 +0800</lastBuildDate>
+    <pubDate>Tue, 06 Nov 2018 21:28:28 +0800</pubDate>
+    <lastBuildDate>Tue, 06 Nov 2018 21:28:28 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -374,77 +374,6 @@ Form由一些FomeItem组成，可以为Form设置rule来指定相关表单项的
         <category>drag</category>
         
         <category>JavaScript</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>有关浏览器缓存 200vs304</title>
-        <description>&lt;h2 id=&quot;基本概念&quot;&gt;基本概念&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Etag&lt;/strong&gt;：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;If-None-Match&lt;/strong&gt;：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源的相应校验串进行比对，决定是否命中协商缓存；&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Last-Modify/If-Modify-Since&lt;/strong&gt;：浏览器第一次请求一个资源的时候，服务器返回的header中会加上Last-Modify，Last-modify是一个时间标识该资源的最后修改时间；当浏览器再次请求该资源时，request的请求头中会包含If-Modify-Since，该值为缓存之前返回的Last-Modify。服务器收到If-Modify-Since后，根据资源的最后修改时间判断是否命中缓存。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Expires&lt;/strong&gt;：response header里的过期时间，浏览器再次加载资源时，如果在这个过期时间内，则命中强缓存。&lt;/li&gt;
-  &lt;li&gt;Cache-Control：当值设为max-age=300时，则代表在这个请求正确返回时间（浏览器也会记录下来）的5分钟内再次加载资源，就会命中强缓存。&lt;/li&gt;
-  &lt;li&gt;-no-cache：不使用本地缓存。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。&lt;/li&gt;
-  &lt;li&gt;-no-store：直接禁止浏览器缓存数据，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;浏览器缓存过程&quot;&gt;浏览器缓存过程&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/6038331-613485beb848e6a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/554&quot; alt=&quot;浏览器缓存过程&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;初始状态&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;第一次访问时，向服务器发送请求，成功收到响应，返回&lt;strong&gt;200&lt;/strong&gt;，浏览器下载资源文件，并记录下response header和返回时间。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;再次请求相同资源&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;再次访问相同资源时，本地先判断是否需要发送请求给服务端：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;比较当前时间和上一次返回200时的时间差，如果未超过过期时间，则&lt;strong&gt;命中强缓存&lt;/strong&gt;，读取本地缓存资源&lt;/li&gt;
-  &lt;li&gt;如果过期了，则向服务器发送header带有&lt;strong&gt;If-None-Match&lt;/strong&gt;和&lt;strong&gt;If-Modified-Since&lt;/strong&gt;的请求&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;3.服务器收到请求后，&lt;strong&gt;优先根据Etag&lt;/strong&gt;的值判断被请求的文件有没有做修改，Etag值一致则没有修改，&lt;strong&gt;命中协商缓存&lt;/strong&gt;，返回&lt;strong&gt;304&lt;/strong&gt;；如果不一致则有改动，直接返回新的资源文件带上新的Etag值并返回&lt;strong&gt;200&lt;/strong&gt;；&lt;/p&gt;
-
-&lt;p&gt;4.如果服务器收到的请求没有Etag值，则将If-Modified-Since和被请求文件的&lt;strong&gt;最后修改时间&lt;/strong&gt;做比对，一致则&lt;strong&gt;命中协商缓存&lt;/strong&gt;，返回&lt;strong&gt;304&lt;/strong&gt;；不一致则返回新的last-modified和文件并返回&lt;strong&gt;200&lt;/strong&gt;；&lt;/p&gt;
-
-&lt;h2 id=&quot;两种刷新对页面的影响&quot;&gt;两种刷新对页面的影响&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;点击刷新按钮或者按F5
-浏览器直接对本地的缓存文件过期，但是会带上If-Modifed-Since，If-None-Match,这就意味着服务器会对文件检查新鲜度，返回结果可能是304，也有可能是200.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;用户按Ctrl+F5（强制刷新）
-浏览器不仅会对本地文件过期，而且不会带上 If-Modifed-Since，If-None-Match，相当于之前从来没有请求过，返回结果是200.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;参考文章&quot;&gt;参考文章：&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/1a1536ab01f1&quot;&gt;强制缓存和协商缓存有什么区别&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 28 Aug 2018 00:00:00 +0800</pubDate>
-        <link>https://cicistream.me/2018/08/28/browser-cache/</link>
-        <guid isPermaLink="true">https://cicistream.me/2018/08/28/browser-cache/</guid>
-        
-        <category>cache</category>
-        
-        <category>304</category>
-        
-        <category>缓存</category>
-        
-        <category>刷新</category>
         
         
       </item>
