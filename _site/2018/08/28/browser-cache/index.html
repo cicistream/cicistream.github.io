@@ -11,16 +11,33 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="About - cici的博客 | cici Blog">
+    <meta property="og:title" content="有关浏览器缓存 200vs304 - cici的博客 | cici Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="你是我的梦想">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="基本概念
+
+">
+    
+    <meta property="article:published_time" content="2018-08-28T00:00:00Z">
+    
+    
+    <meta property="article:author" content="cici">
+    
+    
+    <meta property="article:tag" content="cache">
+    
+    <meta property="article:tag" content="304">
+    
+    <meta property="article:tag" content="缓存">
+    
+    <meta property="article:tag" content="刷新">
+    
     
     <meta property="og:image" content="https://cicistream.me/img/avatar-hux-ny.jpg">
-    <meta property="og:url" content="https://cicistream.me/about/">
+    <meta property="og:url" content="https://cicistream.me/2018/08/28/browser-cache/">
     <meta property="og:site_name" content="cici的博客 | cici Blog">
     
-    <title>About - cici的博客 | cici Blog</title>
+    <title>有关浏览器缓存 200vs304 - cici的博客 | cici Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +46,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://cicistream.me/about/">
+    <link rel="canonical" href="https://cicistream.me/2018/08/28/browser-cache/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -169,150 +186,175 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>About</h1>
-          <span class="subheading">你是我的梦想</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=cache" title="cache">cache</a>
+                        
+                        <a class="tag" href="/archive/?tag=304" title="304">304</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%BC%93%E5%AD%98" title="缓存">缓存</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%88%B7%E6%96%B0" title="刷新">刷新</a>
+                        
+                    </div>
+                    <h1>有关浏览器缓存 200vs304</h1>
+                    
+                    <h2 class="subheading">浏览器刷新到底需不需要重新请求呢？</h2>
+                    <span class="meta">Posted by cici on August 28, 2018</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h2 id="基本概念">基本概念</h2>
+
+<ul>
+  <li><strong>Etag</strong>：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。</li>
+  <li><strong>If-None-Match</strong>：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源的相应校验串进行比对，决定是否命中协商缓存；</li>
+  <li><strong>Last-Modify/If-Modify-Since</strong>：浏览器第一次请求一个资源的时候，服务器返回的header中会加上Last-Modify，Last-modify是一个时间标识该资源的最后修改时间；当浏览器再次请求该资源时，request的请求头中会包含If-Modify-Since，该值为缓存之前返回的Last-Modify。服务器收到If-Modify-Since后，根据资源的最后修改时间判断是否命中缓存。</li>
+  <li><strong>Expires</strong>：response header里的过期时间，浏览器再次加载资源时，如果在这个过期时间内，则命中强缓存。</li>
+  <li>Cache-Control：当值设为max-age=300时，则代表在这个请求正确返回时间（浏览器也会记录下来）的5分钟内再次加载资源，就会命中强缓存。</li>
+  <li>-no-cache：不使用本地缓存。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</li>
+  <li>-no-store：直接禁止浏览器缓存数据，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。</li>
+</ul>
+
+<h4 id="浏览器缓存过程">浏览器缓存过程</h4>
+<p><img src="https://upload-images.jianshu.io/upload_images/6038331-613485beb848e6a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/554" alt="浏览器缓存过程" /></p>
+
+<ol>
+  <li>初始状态</li>
+</ol>
+
+<p>第一次访问时，向服务器发送请求，成功收到响应，返回<strong>200</strong>，浏览器下载资源文件，并记录下response header和返回时间。</p>
+
+<ol>
+  <li>再次请求相同资源</li>
+</ol>
+
+<p>再次访问相同资源时，本地先判断是否需要发送请求给服务端：</p>
+<ul>
+  <li>比较当前时间和上一次返回200时的时间差，如果未超过过期时间，则<strong>命中强缓存</strong>，读取本地缓存资源</li>
+  <li>如果过期了，则向服务器发送header带有<strong>If-None-Match</strong>和<strong>If-Modified-Since</strong>的请求</li>
+</ul>
+
+<p>3.服务器收到请求后，<strong>优先根据Etag</strong>的值判断被请求的文件有没有做修改，Etag值一致则没有修改，<strong>命中协商缓存</strong>，返回<strong>304</strong>；如果不一致则有改动，直接返回新的资源文件带上新的Etag值并返回<strong>200</strong>；</p>
+
+<p>4.如果服务器收到的请求没有Etag值，则将If-Modified-Since和被请求文件的<strong>最后修改时间</strong>做比对，一致则<strong>命中协商缓存</strong>，返回<strong>304</strong>；不一致则返回新的last-modified和文件并返回<strong>200</strong>；</p>
+
+<h2 id="两种刷新对页面的影响">两种刷新对页面的影响</h2>
+
+<ul>
+  <li>
+    <p>点击刷新按钮或者按F5
+浏览器直接对本地的缓存文件过期，但是会带上If-Modifed-Since，If-None-Match,这就意味着服务器会对文件检查新鲜度，返回结果可能是304，也有可能是200.</p>
+  </li>
+  <li>
+    <p>用户按Ctrl+F5（强制刷新）
+浏览器不仅会对本地文件过期，而且不会带上 If-Modifed-Since，If-None-Match，相当于之前从来没有请求过，返回结果是200.</p>
+  </li>
+</ul>
+
+<h3 id="参考文章">参考文章：</h3>
+
+<ul>
+  <li><a href="https://www.jianshu.com/p/1a1536ab01f1">强制缓存和协商缓存有什么区别</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/10/27/vue-nextTick/" data-toggle="tooltip" data-placement="top" title="关于Vue中nextTick()的思考">
+                        Previous<br>
+                        <span>关于Vue中nextTick()的思考</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/09/17/drag-drop/" data-toggle="tooltip" data-placement="top" title="vue中实现基础组件——拖拽组件">
+                        Next<br>
+                        <span>vue中实现基础组件——拖拽组件</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
         
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			<!-- Language Selector -->
-<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select>
-
-<!-- Chinese Version -->
-<div class="zh post-container">
-    
-    <blockquote>
-  <p>写写代码，做做设计，<br />
-离开世界之前，一切都是过程。</p>
-</blockquote>
-
-<p>Hey，我是黄玄，病毒种，进化程度不明，多出没于<a href="https://huangxuan.me">博客</a>、<a href="weibo.com/huxpro">微博</a>、<a href="https://www.zhihu.com/people/huxpro/pins/posts">知乎</a>、<a href="https://twitter.com/Huxpro/">Twitter</a>、<a href="http://github.com/huxpro">Github</a>、<a href="https://medium.com/@Huxpro">Medium</a> 等地带，绝招尚在开发中。</p>
-
-<p>职业是软件工程师，<a href="https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl">Web 工会</a>活跃成员。目前在 <a href="https://www.facebook.com/">Facebook</a> 写 <a href="https://reasonml.github.io/">Reason</a> 与 <a href="http://messenger.com/">Messenger.com</a> ，曾被招募为淘宝网 · <a href="http://alitrip.com">阿里旅行</a>前端工程师、微影时代 · <a href="http://www.wepiao.com/?r=movie">微票儿</a>前端基础工程团队负责人、<a href="https://ele.me/">饿了么</a> · 大前端团队 · <a href="https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509">PWA 顾问</a>。</p>
-
-<p>一些作品和开源软件项目，👉 戳 <a href="/portfolio">Portfolio</a>、<a href="http://github.com/huxpro">Github</a>、<a href="https://zhuanlan.zhihu.com/p/21280918">演说.io</a>。</p>
-
-<h5 id="talks">Talks</h5>
-
-<ul>
-  <li><a href="//huangxuan.me/jsconfcn2017/">Upgrading to Progressive Web Apps</a> · <a href="http://2017.jsconf.cn/">JSConf CN 上海 2017</a></li>
-  <li>Building Progressive Web Apps · <a href="http://www.csdisummit.com/">CSDI 广州 2017</a></li>
-  <li>The State of Progressive Web App · GDG IO Redux 北京 2017</li>
-  <li>炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017</li>
-  <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest 北京 2016</li>
-  <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web App，复兴序章</a> · <a href="http://2016.qconshanghai.com/presentation/3111">QCon 上海 2016</a></li>
-  <li>Progressive Web App 之我见 · GDG IO Redux 北京 2016</li>
-  <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
-  <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript 模块化七日谈</a> · 2015</li>
-</ul>
-
-
-</div>
-
-<!-- English Version -->
-<div class="en post-container">
-    
-    
-<blockquote>
-  <p>Yet another man.</p>
-</blockquote>
-
-<p>Hi, I am <em>@huxpro</em> (Huang, Xuan), a software engineer &amp; a designer. I am currently working on <a href="https://reasonml.github.io/">Reason</a> and <a href="http://messenger.com/">Messenger.com</a> at <a href="https://www.facebook.com/">Facebook</a>. I previously worked as Web Front-End Engineer at <a href="https://www.alitrip.com/">Alibaba Trip</a>; Web Front-End Infrastructure Team Lead at <a href="https://www.crunchbase.com/organization/wepiao#/entity">Wepiao.com</a>; And <a href="(https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)">Invited Consultant on PWA</a> at <a href="https://github.com/elemefe/">Ele.me</a>.</p>
-
-<p>I studied Digital Media Art and graduated from <a href="https://en.wikipedia.org/wiki/Communication_University_of_China">Communication University of China</a> by 2016, and am studying Computer Science at <a href="https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology">Rochester Institute of Technology</a> from 2017.</p>
-
-<h5 id="talks">Talks</h5>
-
-<ul>
-  <li><a href="//huangxuan.me/jsconfcn2017/">Upgrading to Progressive Web Apps</a> · <a href="http://2017.jsconf.cn/">JSConf China Shanghai 2017</a></li>
-  <li>Building Progressive Web Apps · <a href="http://www.csdisummit.com/">CSDI Guangzhou 2017</a></li>
-  <li>The State of Progressive Web App · GDG IO Redux Beijing 2017</li>
-  <li>PWA Rehashing · Baidu HQ Beijing 2017</li>
-  <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest Beijing 2016</li>
-  <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps</a> · QCon Shanghai 2016</li>
-  <li>Progressive Web App in my POV · GDG IO Redux Beijing 2016</li>
-  <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
-  <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript Modularization Journey</a> · 2015</li>
-</ul>
-
-
-</div>
-
-
-
-<!-- disqus 评论框 start -->
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
-
-    </div>
-</div>
-<!-- disqus 评论框 end -->
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hux";
-    var disqus_identifier = "hux//about/";
-    var disqus_url = "https://cicistream.me/about/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -334,71 +376,6 @@
     </div>
 </section>
 
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="/img/avatar-hux-ny.jpg" />
-    
-    
-    <p>For the next quantum leap<br>离开世界之前，一切都是过程</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  <li>
-    <a href="https://twitter.com/huxpro">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://www.zhihu.com/people/huxpro">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="http://weibo.com/huxpro">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/huxpro">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-</ul>
-  </div>
-</section>
 
                 <!-- Friends Blog -->
                 
@@ -428,10 +405,69 @@
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hux";
+    var disqus_identifier = "/2018/08/28/browser-cache";
+    var disqus_url = "https://cicistream.me/2018/08/28/browser-cache/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 
@@ -595,55 +631,6 @@
 
 
 <!-- Multi-Lingual -->
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // bind hashchange event
-    // Changes at v1.7.2: change the language flag from hash-basing to in-memory basing
-    // due to its confliction with catalog anchors.
-    // window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render(_hash){
-        var _hash = _hash || window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $en.classList.add("active");
-            $zh.style.display = "none";
-            $zh.classList.remove("active");
-        // zh by default
-        }else{
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $zh.classList.add("active");
-            $en.style.display = "none";
-            $en.classList.remove("active");
-        }
-        // interop with catalog 
-        if ("") generateCatalog(".catalog-body");
-    }
-
-    // handle select change
-    function onLanChange(index){
-        if(index == 0){
-            _hash = "#zh"
-        }else{
-            _hash = "#en"
-        }
-        _render(_hash)
-    }
-
-    // init
-    _render();
-</script>
 
 
 

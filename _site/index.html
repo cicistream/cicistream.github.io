@@ -16,8 +16,8 @@
     <meta property="og:type" content="website">
     <meta property="og:description" content="我干了什么 究竟拿了时间换了什么">
     
-    <meta property="og:image" content="http://localhost:4000/img/avatar-hux-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/">
+    <meta property="og:image" content="https://cicistream.me/img/avatar-hux-ny.jpg">
+    <meta property="og:url" content="https://cicistream.me/">
     <meta property="og:site_name" content="cici的博客 | cici Blog">
     
     <title>cici的博客 | cici Blog</title>
@@ -29,7 +29,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/">
+    <link rel="canonical" href="https://cicistream.me/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -102,12 +102,6 @@
                     <li>
                         <a href="/portfolio/">Portfolio</a>
                     </li>
-                    
-                    
-                    
-                    
-                    
-                    
                     
                     
                     
@@ -215,296 +209,329 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2018/10/06/vim-cn-im/">
+    <a href="/2018/09/19/form-validate/">
         <h2 class="post-title">
-            Vim 与中文输入法
+            iview Form表单验证
         </h2>
         
         <h3 class="post-subtitle">
-            Using Vim with non-english input method
+            async-validator相关及踩坑
         </h3>
         
         <div class="post-content-preview">
             
-                Update: 我最后还是放弃在 Vim 模式下输入中文了，mental model 的 cost 太重了（
+                手头的项目有一个需求是创建自定义表单模板，深入使用了iview的Form控件，踩了不少iview的坑，同时也锻炼了validate相关的能力。
 
 
 
-我相信很多中文世界的 Vimer 都遇到过这个烦恼，在 vim 的 insert 模式时可能突然想输个中文，输完之后会本能的直接 esc 接 normal 模式操作，结果发现跳出来的是中文输入法……对于 vscode，我一般会在几次错误之后被逼到退出 vscode vim...
+基本知识
+
+Form由一些FomeItem组成，可以为Form设置rule来指定相关表单项的限制条件。
+通过$ref 可以访问到 Form 组件，调用 validate 函数，即可获取相应的校验函数。iview中，Form验证是根据FormIt...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on October 6, 2018
+        Posted by cici on September 19, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2018/09/27/avoiding-success-at-all-cost/">
+    <a href="/2018/09/17/drag-drop/">
         <h2 class="post-title">
-            Avoiding success at all cost
+            vue中实现基础组件——拖拽组件
         </h2>
         
         <h3 class="post-subtitle">
-            Watching "Escape from the Ivory Tower: The Haskell Journey"
+            简单实现拖拽组件——drag & drop
         </h3>
         
         <div class="post-content-preview">
             
-                “Avoiding success at all cost” is the informal motto behinds Haskell. It could be parenthesized in two ways, either “Avoiding (success at all cost)” or “(Avoiding sucess) (at all cost)”.
+                前言
+pc端开发需要拖拽组件完成列表的顺序交换，一般移动端的UI组件会包含，但是我在用的iview并没有此功能的组件，于是手写一个，实现起来很简单。效果图如下：
 
-I’m not going to interpret them directly but rather to share some thoughts on “the success vs. costs” basing ...
+可以拖拽完成新排序，点击某一项可以触发相关事件.
+
+关于拖拽 drag &amp; drop
+
+拖放（Drag 和 drop）是 HTML5 标准的组成部分。
+
+
+  拖拽对象
+
+
+dataTransfer对象，只能在拖放事件的事...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on September 27, 2018
+        Posted by cici on September 17, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2018/06/30/dreamer/">
+    <a href="/2018/08/28/browser-cache/">
         <h2 class="post-title">
-            程序员中的梦想家
+            有关浏览器缓存 200vs304
         </h2>
         
         <h3 class="post-subtitle">
-            Dreamers among programmers
+            浏览器刷新到底需不需要重新请求呢？
         </h3>
         
         <div class="post-content-preview">
             
-                
-  本文首发于我的知乎专栏 The Little Programmer，转载请保留链接 ;)
+                基本概念
 
 
-有一类程序员是 visionary 型的，为了实现一些超前的 idea，绕过某些技术的限制，他们写的 code 晦涩高深得只有他们自己能懂，做出来的 tool 看上去很美好结果处处是坑出了 bug 根本没法查，但正是这类人不断创造出新的东西，在洗礼之后成为一个个 big thing。
-
-我每周...
+  Etag：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。
+  If-None-Match：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on June 30, 2018
+        Posted by cici on August 28, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/12/12/uncomputable-funcs/">
+    <a href="/2017/10/27/vue-nextTick/">
         <h2 class="post-title">
-            「知乎」如何证明不可计算的函数比可计算的函数多？
+            关于Vue中nextTick()的思考
         </h2>
         
         <h3 class="post-subtitle">
-            Why is there more uncomputable functions?
+            nextTick是怎么利用JS中的异步方法的？
         </h3>
         
         <div class="post-content-preview">
             
-                
-  这篇文章转载自我在知乎上的回答
-
-
-严谨的证明的话，可以使用「形式语言」（Formal language）来证明：
-
-在可计算理论和计算复杂度理论中，每个「计算问题」都被描述为一个一个「形式语言」，即字符串的集合。比如对于判断一个图是否是无向连通图这个问题：我们可以写为一个描述所有无向连通图的集合：
-
-
-
-由于图灵机只能接受字符串，所以这里的尖括号表示对图的「编码」。出于简单，我们全部...
+                　　我的项目中有一个swiper插件，在vue实例created(生命周期相关)函数中，先用ajax异步加载数据，再初始化swiper轮播插件时，遇到了一个问题，由于动态数据加载导致了swiper初始化后会滑动到最后一个item。我当时的解决方法是用setTimeout()来延迟初始化，之后在学习es6的时候，我发现更好的解决办法是使用promise.then.但是，没有最后只有更好，pro...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on December 12, 2017
+        Posted by cici on October 27, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/12/12/halting-problem/">
+    <a href="/2017/10/16/rendering-accelerate/">
         <h2 class="post-title">
-            「知乎」如何通俗地解释停机问题？
+            如何更快地构建与渲染
         </h2>
         
         <h3 class="post-subtitle">
-            How to explain the Halting Problem?
+            加速构建可以从CSS/HTML/JS多方面入手
         </h3>
         
         <div class="post-content-preview">
             
-                
-  这篇文章转载自我在知乎上的回答
+                在上一篇中，我详细描述了浏览器渲染的过程，那么，如何来提升渲染效率，使页面更快的加载完成呢。
+我将这些方法分为几部分分别介绍。
 
+CSS部分
 
-我用 Python 伪代码来解释下，我觉得对这个问题有兴趣的应该都是有点编程基础的，所以直接上 code 应该是最容易的。
+1. 媒体类型和媒体查询
 
-背景知识
+将CSS分割为片段，对于不同的浏览器，不同的终端，不同的阅读模式，应用不同的CSS样式表。如果将这些内容写到统一个文件中，浏览器需要下载并解析他们。所以我们应该将这些内容通过对link元素的media属性来指定：
 
-「停机问题」研究的是：是否存在一个「程序」，能够判断另外一个「程序」在特定的「输入」下，是会给出结果（停机），还是会无限执行下去（不停机）。
-
-在下文中，我们用「函数」来表示「程序」，「函数返回」即表示给出了结果。...
+1
+2...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on December 12, 2017
+        Posted by cici on October 16, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/10/06/css-complaints/">
+    <a href="/2017/10/14/JavaScript-event/">
         <h2 class="post-title">
-            「知乎」为什么 CSS 这么难学？
+            JS——事件绑定与处理总结（上）
         </h2>
         
         <h3 class="post-subtitle">
-            Why I dislike CSS as a programming language
+            不同内核浏览器的事件处理方式有差异
         </h3>
         
         <div class="post-content-preview">
             
-                
-  这篇文章转载自我在知乎上的回答
+                　　JavaScript与HTML之间的交互是通过事件实现的。
+
+  事件是指文档或浏览器窗口发生的一些特定的交互瞬间，可以用监听器（或处理程序）来预定事件，以便在事件发生时执行相应的代码。——摘自《高程》
 
 
-对我来说，CSS 难学以及烦人是因为它「出乎我意料之外的复杂」且让我觉得「定位矛盾」。
+理解事件是实现良好交互的必要条件，本文旨在系统地总结事件相关知识。
 
-@方应杭 老师的答案我赞了：CSS 的属性互不正交，大量的依赖与耦合难以记忆。
+(上)主要内容：
 
-@顾轶灵 @王成 说得也没错：CSS 的很多规则是贯彻整个体系的，而且都记在规范里了，是有规律的，你应该好好读文档而不是去瞎试。
 
-「CSS是一门正儿八经的编程语言，请拿出你学C+...
+  理解事件流
+  使用事件处理程序
+
+
+1.理解事件流
+
+事件流描述的是从页面中接收事件...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on October 6, 2017
+        Posted by cici on October 14, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/07/26/farewell-flash/">
+    <a href="/2017/10/06/rendering-process/">
         <h2 class="post-title">
-            Farewell, Flash. 感谢你，但这一次是真正的永别。
+            完整渲染过程——从URL到页面
         </h2>
         
         <h3 class="post-subtitle">
-            So long, and thanks for all the Flash
+            页面渲染过程发生了什么?
         </h3>
         
         <div class="post-content-preview">
             
-                
-  本文首发于我的知乎专栏 The Little Programmer，转载请保留链接 ;)
+                当用户输入一串URL（统一资源定位符）到完整的页面渲染出来，到底经历了什么呢。
+
+首先列出大概流程：
+
+  浏览器根据请求的URL交给DNS域名解析，找到真实的IP，向服务器发起请求
+  服务器交给后台处理完后返回数据，浏览器接受文件（HTML/CSS/JS/图像等）
+  浏览器对加载到的数据进行解析，建立起相应的内部结构
+  载入解析到的资源文件，渲染页面，完成
 
 
-一年半前，我曾和 Flash 作过一次告别。那一次，Adobe Flash Professional CC 被重新命名为了 Adobe Animate CC，宣告着 Flash 作为一个创作工具走到了尽头。
-
-
-
-而今天，通过 Chromium 博客 So long, and thanks f...
+我们主要分为两部分具体...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on July 26, 2017
+        Posted by cici on October 6, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/07/12/upgrading-eleme-to-pwa/">
+    <a href="/2017/10/03/js-regexp/">
         <h2 class="post-title">
-            饿了么的 PWA 升级实践
+            JS——正则详解
         </h2>
         
         <h3 class="post-subtitle">
-            Upgrading Ele.me to Progressive Web App
+            JS——RegExp
         </h3>
         
         <div class="post-content-preview">
             
-                
+                Update: 文章内容摘自阮一峰大大—RegExp对象，总结一下方便自己记忆
 
+
+
+1.正则匹配规则
+
+
+  
+    字面量字符串
+
+    /dog/ 匹配 ‘dog’
+  
+  
+    元字符
+
+    点字符（.） 匹配 除回车（\r）、换行(\n) 、行分隔符（\u2028）和段分隔符（\u2029）以外的所有字符。
+位置字符（^ / $） ^/$ 表示字符串开始/结束的位置
+...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by cici on October 3, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/09/06/mobile-rem/">
+        <h2 class="post-title">
+            移动端布局单位
+        </h2>
+        
+        <h3 class="post-subtitle">
+            关于像素与font-size
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                移动端设备种类繁多，需要适配多种情况的响应式布局来保证美观的页面实现，先来解释容易弄混的多个名词。
+
+
+  PPI
     
+      单位英寸像素数
     
+  
+  DPR
+    
+      设备像素比： 设备像素 / CSS像素(某一方向上)
+    
+  
+  DPI
+    
+      Dpi（每平方英寸像素数目）：图像细节程度的度量
+    
+  
 
-  很荣幸在今年 2 月到 5 月的时间里，以顾问的身份加入饿了么，参与 PWA 的相关工作。这篇文章其实最初是在以英文写作发表在 medium 上的：Upgrading Ele.me to Progressive Web Apps，获得了一定的关注。所以也决定改写为中文版本再次分享出来，希望能对你有所帮助 ;) 
-本文首发于 CSDN 与《程序员》2017 年 7...
+
+建议看一下知识小...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on July 12, 2017
+        Posted by cici on September 6, 2017
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2017/06/24/you-are-slaves/">
+    <a href="/2017/09/03/JavaScript-array/">
         <h2 class="post-title">
-            他是狗，你们便是苟奴隶
+            菜鸟系列——forEach、map、for...in、for...of
         </h2>
+        
+        <h3 class="post-subtitle">
+            常用的数组方法
+        </h3>
         
         <div class="post-content-preview">
             
-                
-  在知乎被删帖，我理解知乎。
-你说你们做不了什么，我也理解你们。
+                作为一个前端小菜鸟，有好多容易弄混的名词
+我想把搞清楚的一一记录下来，帮助记忆
 
-只是，总要有人，还敢说点反对的声音吧？  
-只是，不想让这一切，看起来都变得如此理所应当吧？
-
-你说，你们也抗争了
-那就站出来，让我们相信，你们还在吧？
-
-
-我甚至都不需要写出 LGL 三个顶天立地的大字，你们便知道我今天要说什么了。
-骂狗官、骂体制、骂 D，骂的人已经够多了。我故是可以再骂，却也深知自己甚至连让他们听到...
+forEach、map、for...in、for...of
+这四个方法都是可以遍历数组或类数组的，很容易就懵了，必须总结一下他们的使用对象和区别，加以区分。
+首先，map()和forEach()是Array自带的方法，Map对象也有forEach()方法，而for...in和for...of是对数组/类数组元素...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on June 24, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/05/28/sw-precache/">
-        <h2 class="post-title">
-            How does SW-Precache works?
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                SW-Precache is a great Service Worker tool from Google. It is a node module designed to be integrated into your build process and to generate a service worker for you. Though you can use sw-precache out of the box, you might still wonder what happens under the hood. There you go, this article is ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Hux on May 28, 2017
+        Posted by cici on September 3, 2017
     </p>
 </div>
 <hr>
 
 
 <!-- Pager -->
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page2">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
 
 
     		</div>
@@ -530,90 +557,15 @@ I’m not going to interpret them directly but rather to share some thoughts on 
         </a>
         
         
-                <a data-sort="0027" 
-                    href="/archive/?tag=%E7%9F%A5%E4%B9%8E"
-                    title="知乎"
-                    rel="10">知乎</a>
-        
-                <a data-sort="0018" 
-                    href="/archive/?tag=Web"
-                    title="Web"
-                    rel="19">Web</a>
-        
-                <a data-sort="0030" 
-                    href="/archive/?tag=UX%2FUI"
-                    title="UX/UI"
-                    rel="7">UX/UI</a>
-        
-                <a data-sort="0031" 
-                    href="/archive/?tag=%E4%BA%A7%E5%93%81"
-                    title="产品"
-                    rel="6">产品</a>
-        
-                <a data-sort="0031" 
-                    href="/archive/?tag=PWA"
-                    title="PWA"
-                    rel="6">PWA</a>
-        
-                <a data-sort="0033" 
+                <a data-sort="0004" 
                     href="/archive/?tag=JavaScript"
                     title="JavaScript"
-                    rel="4">JavaScript</a>
+                    rel="6">JavaScript</a>
         
-                <a data-sort="0033" 
-                    href="/archive/?tag=Slides"
-                    title="Slides"
-                    rel="4">Slides</a>
-        
-                <a data-sort="0034" 
-                    href="/archive/?tag=%E7%94%9F%E6%B4%BB"
-                    title="生活"
-                    rel="3">生活</a>
-        
-                <a data-sort="0034" 
-                    href="/archive/?tag=%E7%AC%94%E8%AE%B0"
-                    title="笔记"
-                    rel="3">笔记</a>
-        
-                <a data-sort="0034" 
-                    href="/archive/?tag=%E8%AF%91"
-                    title="译"
-                    rel="3">译</a>
-        
-                <a data-sort="0034" 
-                    href="/archive/?tag=%E9%98%BF%E9%87%8C"
-                    title="阿里"
-                    rel="3">阿里</a>
-        
-                <a data-sort="0034" 
-                    href="/archive/?tag=%F0%9F%87%AC%F0%9F%87%A7"
-                    title="🇬🇧"
-                    rel="3">🇬🇧</a>
-        
-                <a data-sort="0035" 
-                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6"
-                    title="计算机科学"
-                    rel="2">计算机科学</a>
-        
-                <a data-sort="0035" 
-                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA"
-                    title="计算理论"
-                    rel="2">计算理论</a>
-        
-                <a data-sort="0035" 
-                    href="/archive/?tag=CSS"
-                    title="CSS"
-                    rel="2">CSS</a>
-        
-                <a data-sort="0035" 
-                    href="/archive/?tag=Wechat"
-                    title="Wechat"
-                    rel="2">Wechat</a>
-        
-                <a data-sort="0035" 
-                    href="/archive/?tag=hUX+%E9%9A%8F%E6%83%B3%E5%BD%95"
-                    title="hUX 随想录"
-                    rel="2">hUX 随想录
+                <a data-sort="0008" 
+                    href="/archive/?tag=rendering"
+                    title="rendering"
+                    rel="2">rendering
     </div>
 </section>
 
