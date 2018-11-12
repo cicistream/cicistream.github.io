@@ -58,7 +58,7 @@ console.log(arr);    //[2,4,6,8]
  // 如果写return item*2，原数组也不会改变
  ```
  
-forEach()不能使用continue, break;
+forEach()无法中途跳出forEach循环，break命令或return命令都不能奏效;
 map()速度最快.
 
 作为 Map 的forEach方法时，与数组的forEach方法类似，也可以实现遍历。
