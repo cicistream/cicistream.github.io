@@ -1,5 +1,5 @@
 ---
-layout: keynote
+layout: page
 title: "基本包装类型"
 subtitle: "一些基础知识"
 author: "cici"
@@ -16,8 +16,8 @@ tags:
 　　实际上，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们能够调用一些方法来操作这些数据。
 　　
 ```javascript
-　　var s1="nice";
-　　var s2=s1.substring(2);
+var s1="nice";
+var s2=s1.substring(2);
 ```
 　　在你写出上面的代码时，后台都会完成如下操作：
 　　
@@ -27,9 +27,9 @@ tags:
  
  可以想象为：
 ```javascript
-	var s1=new String("nice");
-	var s2=s1.substring(2);
-	s1=null
+var s1=new String("nice");
+var s2=s1.substring(2);
+s1=null
 ```
 经过此番处理，基本类型的字符串值就变得像对象一样了。
 
