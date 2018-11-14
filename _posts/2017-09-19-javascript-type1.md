@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: "基本包装类型"
 subtitle: "一些基础知识"
 author: "cici"
