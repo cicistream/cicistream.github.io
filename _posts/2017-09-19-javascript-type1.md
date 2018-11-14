@@ -1,17 +1,15 @@
 ---
 layout: text
 title: "基本包装类型"
-subtitle: "async-validator相关及踩坑"
+subtitle: "一些基础知识"
 author: "cici"
 tags:
   - JavaScript
 ---
 
-手头的项目有一个需求是创建自定义表单模板，深入使用了iview的Form控件，踩了不少iview的坑，同时也锻炼了validate相关的能力。
+好久之前看的高程，最近有些忘记了，疑惑基本包装类型存在的意义，下面总结一下
 
 ----------
-
-好久之前看的高程，最近有些忘记了，疑惑基本包装类型存在的意义，下面总结一下：
 
 > 为了便于操作基本类型，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。
 
