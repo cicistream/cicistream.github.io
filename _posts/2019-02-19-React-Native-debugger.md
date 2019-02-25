@@ -34,14 +34,20 @@ react-native巨坑，相关插件也巨坑，版本更新慢，维护不及时�
 A problem occurred configuring project ':app'.
 SDK location not found. Define location with sdk.dir in the local.properties file or with an ANDROID_HOME environment
 ```
-![图片1](https://note.youdao.com/favicon.ico)
-![图片1](https://note.youdao.com/favicon.ico)
+![图片1](/img/in-post/post-rn-debug/prob1.png)
+
+
+2. A problem occurred configuring project ':app'.
+SDK location not found. Define location with sdk.dir in the local.properties file or with an ANDROID_HOME environment
+
+![图片2](/img/in-post/post-rn-debug/prob2.png)
 
 ### 2.开发过程
 1. **绝对定位元素被键盘顶起**<br>
 打开android工程，在AndroidManifest.xml中配置如下：
+```javascript
  android:windowSoftInputMode=“stateAlwaysHidden|adjustPan”
-
+```
 2. **StatusBar 主题污染**
 ```javascript
 componentDidMount() {
@@ -60,4 +66,21 @@ fontFamily: 'System'
 4. **使用Button进行路由跳转时报错**<br>
 这个错误一般只在开启`Debug JS Remotely`时出现，可以通过使用TouchableOpacity包裹或替换解决
 
-5. to be continue
+5. **使用react-native-camera插件的页面二次进入黑屏**<br>
+通过focusedScreen的true/false来显示RNcamera组件
+```javascript
+componentDidMount() {
+    const { navigation } = this.props;
+    navigation.addListener('willFocus', () =>
+      this.setState({ focusedScreen: true })
+    );
+    navigation.addListener('willBlur', () =>
+      this.setState({ focusedScreen: false })
+    );
+  }
+```
+
+6. **React-Native的样式与web有所不同**<br>
+具体的样式指南参看[React-Native 样式指南](https://github.com/doyoe/react-native-stylesheet-guide#react-native-%E6%A0%B7%E5%BC%8F%E6%8C%87%E5%8D%97)
+
+7. to be continue
