@@ -2,7 +2,9 @@
 layout: post
 title: "React-Native填坑笔记"
 subtitle: "React-Native中令人摸不着头脑的坑"
+date:  2019-02-19
 author: "cici"
+header-img: "img/home-bg-art.jpg"
 tags:
   - React-Native
   - debug
@@ -39,7 +41,6 @@ SDK location not found. Define location with sdk.dir in the local.properties fil
 
 2. A problem occurred configuring project ':app'.
 SDK location not found. Define location with sdk.dir in the local.properties file or with an ANDROID_HOME environment
-
 ![图片2](/img/in-post/post-rn-debug/prob2.png)
 
 ### 2.开发过程
