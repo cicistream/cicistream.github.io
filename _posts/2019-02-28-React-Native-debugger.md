@@ -21,7 +21,7 @@ React-Native 的样式基本上是实现了 CSS 的一个子集，很多写法�
 ### 样式写法
 - 内联
 ```
-style={{ margin:10 }}
+style={{ height:100 }}
 ```
 - 外联
 ```
