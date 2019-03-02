@@ -16,8 +16,6 @@ tags:
 
 我在做的ReactNative项目需要实现扫码功能以及从相册读取本地二维码的功能
 
-![image](https://note.youdao.com/favicon.ico)
-
 我实现这两个功能使用的插件有
 - [react-native-camera](https://github.com/react-native-community/react-native-camera)
 - [react-native-image-picker](https://github.com/react-native-community/react-native-image-picker)
@@ -26,7 +24,7 @@ tags:
 ## 扫码功能
 
 ### 扫描页面黑屏
-首先是使用react-native-camera完成扫码功能，根据git文档进行安装和配置，摄像头处理权限等配置不再赘述，遇到问题可以在Issue中看看是否有解决。下面称我实现的扫描页面为Scan页。<br>
+首先是使用react-native-camera完成扫码功能，根据git文档进行安装和配置，摄像头处理权限等配置不再赘述，遇到问题可以在Issue中看看是否有解决。<br>下面称我实现的扫描页面为Scan页。<br>
 ![image](/img/in-post/scan.jpg)<br>
 我遇到的第一个问题是重复进入Scan页，相机加载有问题，会出现黑屏现象。解决办法是，根据navigation判断，当进入页面时，再显示RNCamera.
 ```javascript
@@ -48,7 +46,7 @@ this.state.focusedScreen && RNCameraComponent
 第二个问题是相机布局，设计给的图是像微信的二维码扫描一样，中间有一块透明区域做扫码。RNCamera无法设置宽高，视图是全屏，需要自己布局。我将页面分为了上中下三块，中间又分为左中右三块，大概是这样：<br>
 ![image](/img/in-post/scan2.jpg)<br>
 
-中间②区域背景用UI给的透明图片，加上扫描动画，就像模像样啦~
+中间②区域背景用UI给的透明图片，加上扫描动画，就像模像样啦~<br>
 扫描动画用的是RN原生的Animated
 
 ```javascript
@@ -79,12 +77,13 @@ startAnimation = () => {
 
 ## 相册读取二维码
 
-这一部分我用了[react-native-image-picker](https://github.com/react-native-community/react-native-image-picker)和[react-native-local-barcode-recognizer](https://github.com/januslo/react-native-local-barcode-recognizer)，首先用`react-native-image-picker`读取相册并选取想要扫描的图片，再将图片信息使用`react-native-local-barcode-recognizer`解析，其实解析部分也可以自己使用`Zxing`库，`react-native-local-barcode-recognizer`本身也是对`Zxing`的封装。
+这一部分我用了[react-native-image-picker](https://github.com/react-native-community/react-native-image-picker)和[react-native-local-barcode-recognizer](https://github.com/januslo/react-native-local-barcode-recognizer)<br>
+首先用`react-native-image-picker`读取相册并选取想要扫描的图片，再将图片信息使用`react-native-local-barcode-recognizer`解析，其实解析部分也可以自己使用`Zxing`库，`react-native-local-barcode-recognizer`本身也是对`Zxing`的封装。
 
 引入两个库的过程git上有，很方便的一点是`image-picker`读取图片数据可以直接获取Base64数据，格式刚好是`local-barcode-recognizer`解析需要的。
 
 ### 部分二维码无法识别
-`local-barcode-recognizer`库解析时，有些二维码无法识别，我刚开始一直以为是二维码数据过长，不好解析，后来发现是现在的手机拍照像素高照片过大。于是在`local-barcode-recognizer`库的源码解析代码中加入一个缩小图片数据的函数。果然，缩小图片后可以解析之前拍下的二维码啦~
+`local-barcode-recognizer`库解析时，有些二维码无法识别，我刚开始一直以为是二维码数据过长，不好解析，后来发现是现在的手机拍照像素高照片过大。<br>于是在`local-barcode-recognizer`库的源码解析代码中加入一个缩小图片数据的函数。果然，缩小图片后可以解析之前拍下的二维码啦~
 
 ```java
 public static Bitmap getSmallerBitmap(Bitmap bitmap) {
@@ -103,7 +102,10 @@ public static Bitmap getSmallerBitmap(Bitmap bitmap) {
 
 ### 二维码识别率低 
 
-二维码识别率低的问题困扰了我很久，毕竟用`react-native-camera`扫描的时候，很快就识别了相应二维码，我找了很久原因，发现`react-native-camera`解析时用的格式是YUV，而`react-native-local-barcode-recognizer`中用的是ARGB,网上也有博客说YUV格式解析识别率会更高，于是我更改了`react-native-local-barcode-recognizer`源码中decode的函数，确实提高了一定的识别率。(但是还是达不到`react-native-camera`的程度，好想直接知道微信的识别算法哦)
+二维码识别率低的问题困扰了我很久，毕竟用`react-native-camera`扫描的时候，很快就识别了相应二维码
+
+我找了很久原因，发现`react-native-camera`解析时用的格式是YUV，而`react-native-local-barcode-recognizer`中用的是ARGB。<br>
+网上也有博客说YUV格式解析识别率会更高，于是我更改了`react-native-local-barcode-recognizer`源码中decode的函数，确实提高了一定的识别率。(但是还是达不到`react-native-camera`的程度，好想直接知道微信的识别算法哦)
 
 ```java
 private BinaryBitmap generateBitmapFromImageData(Bitmap bitmap) {
