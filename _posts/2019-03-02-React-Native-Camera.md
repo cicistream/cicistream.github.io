@@ -4,7 +4,7 @@ title: "React-Native 扫描二维码及读取相册二维码"
 subtitle: "React-Native的扫描功能及读取相册并解析功能的实现"
 date:  2019-03-02
 author: "cici"
-header-img: "img/home-bg-geek.jpg"
+header-img: "img/home-bg.jpg"
 tags:
   - React-Native
   - Mobile
@@ -25,7 +25,7 @@ tags:
 
 ### 扫描页面黑屏
 首先是使用react-native-camera完成扫码功能，根据git文档进行安装和配置，摄像头处理权限等配置不再赘述，遇到问题可以在Issue中看看是否有解决。<br>下面称我实现的扫描页面为Scan页。<br>
-![image](/img/in-post/scan.jpg)<br>
+![image](/img/in-post/scan.jpg)
 我遇到的第一个问题是重复进入Scan页，相机加载有问题，会出现黑屏现象。解决办法是，根据navigation判断，当进入页面时，再显示RNCamera.
 ```javascript
 componentDidMount() {
@@ -44,7 +44,7 @@ this.state.focusedScreen && RNCameraComponent
 ### 相机布局
 
 第二个问题是相机布局，设计给的图是像微信的二维码扫描一样，中间有一块透明区域做扫码。RNCamera无法设置宽高，视图是全屏，需要自己布局。我将页面分为了上中下三块，中间又分为左中右三块，大概是这样：<br>
-![image](/img/in-post/scan2.jpg)<br>
+![image](/img/in-post/scan2.jpg)
 
 中间②区域背景用UI给的透明图片，加上扫描动画，就像模像样啦~<br>
 扫描动画用的是RN原生的Animated
@@ -104,7 +104,8 @@ public static Bitmap getSmallerBitmap(Bitmap bitmap) {
 
 二维码识别率低的问题困扰了我很久，毕竟用`react-native-camera`扫描的时候，很快就识别了相应二维码
 
-我找了很久原因，发现`react-native-camera`解析时用的格式是YUV，而`react-native-local-barcode-recognizer`中用的是ARGB。<br>
+我找了很久原因，发现`react-native-camera`解析时用的格式是YUV，而`react-native-local-barcode-recognizer`中用的是ARGB。
+
 网上也有博客说YUV格式解析识别率会更高，于是我更改了`react-native-local-barcode-recognizer`源码中decode的函数，确实提高了一定的识别率。(但是还是达不到`react-native-camera`的程度，好想直接知道微信的识别算法哦)
 
 ```java
@@ -176,6 +177,5 @@ private BinaryBitmap generateBitmapFromImageData(Bitmap bitmap) {
 如果你像我一样直接修改 node_modules 内依赖源码，记得重新发包哦。因为线上自动化构建时，拉取的是未经修改的依赖。
 
 我的解决办法是：fork 依赖的 git 源码，修改后发布新的npm包，再link 到业务项目中。
-
 
 以上就是我使用React-Native 实现扫描二维码及读取相册二维码的小结，感谢阅读。
