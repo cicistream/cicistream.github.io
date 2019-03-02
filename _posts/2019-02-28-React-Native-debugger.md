@@ -20,21 +20,19 @@ React-Native 的样式基本上是实现了 CSS 的一个子集，很多写法�
 
 ### 样式写法
 - 内联
-```javacript
+```
 style={{ margin:10 }}
 ```
 - 外联
-```javacript
+```
 style={ styles.btn }
 ```
 - 综合
-```javacript
+```
 style={{ ...styles.btn, margin:10 }}
 或
 style={[ styles.btn, { margin:10 } ]}
 ```
-##
-
 
 ## Properties 属性
 
@@ -64,6 +62,7 @@ textDecorationStyle<br /><sup>`iOS`</sup> | `solid`, `double`, `dotted`, `dashed
 writingDirection<br /><sup>`iOS`</sup> | `auto`, `ltr`, `rtl` | 对应 `CSS` [direction](http://css.doyoe.com/properties/writing-modes/direction.htm) 属性，增加了 `auto` 取值
 
 ### Dimension 尺寸（6）
+
 属性名 | 取值 | 描述
 ---|---|---
 width | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [width](http://css.doyoe.com/properties/dimension/width.htm) 属性
@@ -74,6 +73,7 @@ minHeight | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [min-height](h
 maxHeight | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [max-height](http://css.doyoe.com/properties/dimension/max-height.htm) 属性
 
 ### Positioning 定位 
+
 属性名 | 取值 | 描述
 ---|---|---
 position | `absolute`, `relative` | 对应 `CSS` [position](http://css.doyoe.com/properties/positioning/position.htm) 属性，但阉割了 `static, fixed` 取值
@@ -84,6 +84,7 @@ left | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [left](http://css.d
 zIndex | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [z-index](http://css.doyoe.com/properties/positioning/z-index.htm) 属性
 
 ### Margin 外部白 
+
 属性名 | 取值 | 描述
 ---|---|---
 margin | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [margin](http://css.doyoe.com/properties/margin/margin.htm) 属性，不同的是，它只能定义一个参数，如需分别定义`上、右、下、左`4个方位的外补白，可以通过下面的单向外部白属性
@@ -95,6 +96,7 @@ marginBottom | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [margin-bot
 marginLeft | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [margin-left](http://css.doyoe.com/properties/margin/margin-left.htm) 属性
 
 ### Padding 内部白 
+
 属性名 | 取值 | 描述
 ---|---|---
 padding | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [padding](http://css.doyoe.com/properties/padding/padding.htm) 属性，不同的是，它只能定义一个参数，如需分别定义`上、右、下、左`4个方位的内补白，可以通过下面的单向内部白属性
@@ -106,6 +108,7 @@ paddingBottom | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [padding-b
 paddingLeft | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [padding-left](http://css.doyoe.com/properties/padding/padding-left.htm) 属性
 
 ### Border 边框 
+
 属性名 | 取值 | 描述
 ---|---|---
 borderStyle | `solid`, `dotted`, `dashed` | 对应 `CSS` `border-style` 属性，但阉割了 `none, hidden, double, groove, ridge, inset, outset` 取值，且无方向分拆属性
@@ -130,11 +133,13 @@ shadowRadius | [&lt;number&gt;](#user-content-number) | 在 `CSS` 中，阴影�
 shadowOpacity | [&lt;number&gt;](#user-content-number) | 对应 `CSS` [box-shadow](http://css.doyoe.com/properties/border/box-shadow.htm) 属性中的阴影透明度定义
 
 ### Background 背景 
+
 属性名 | 取值 | 描述
 ---|---|---
 backgroundColor | [&lt;color&gt;](#user-content-color) | 对应 `CSS` `background-color` 属性
 
 ### Transform 转换 
+
 属性名 | 取值 | 描述
 ---|---|---
 transform | `[{perspective: number}, {rotate: string}, {rotateX: string}, {rotateY: string}, {rotateZ: string}, {scale: number}, {scaleX: number}, {scaleY: number}, {translateX: number}, {translateY: number}, {skewX: string}, {skewY: string}]` | 对应 `CSS` `transform` 属性
@@ -142,6 +147,7 @@ transformMatrix | `TransformMatrixPropType` | 类似于 `CSS` 中 `transform` �
 backfaceVisibility | `visible`, `hidden` | 对应 `CSS` `backface-visibility` 属性
 
 ### Flexbox 弹性盒 
+
 属性名 | 取值 | 描述
 ---|---|---
 flex | [&lt;number&gt;](#user-content-number) | 对应 `CSS` `flex` 属性，但只能为整数值
