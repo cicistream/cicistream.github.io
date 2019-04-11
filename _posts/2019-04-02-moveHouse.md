@@ -126,7 +126,7 @@ tags:
 - 多抓鱼——回收二手图书
 
 ![image](/img/in-post/post-move/search.jpg)
-![image](/img/in-post/post-move/books.jpg)
+![image](/img/in-post/post-move/books.jpeg)
 
 搬家工具安利：
 
@@ -146,6 +146,10 @@ tags:
   
   记得分类打包，可以用马克笔在箱子上写好哪里是正面，还有里面装了些什么
 
+- 压缩袋
+
+  被子！冬天衣物！压缩带走
+
 搬家公司：
 
 - 蓝犀牛✨（师傅很专业，自带小车车，无额外服务费）
@@ -154,6 +158,14 @@ tags:
 - 自如小搬（朋友说还行）
 
 ### 大型安利现场
+![image](/img/in-post/post-move/1.jpg)
 
-- 宜家系列
-- 收纳系列
+![image](/img/in-post/post-move/2.jpg)
+
+![image](/img/in-post/post-move/3.jpg)
+
+![image](/img/in-post/post-move/5.jpg)
+
+![image](/img/in-post/post-move/4.jpg)
+
+![image](/img/in-post/post-move/6.jpg)
