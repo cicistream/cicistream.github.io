@@ -20,15 +20,15 @@ React-Native 的样式基本上是实现了 CSS 的一个子集，很多写法�
 
 ### 样式写法
 - 内联
-```
+```javascript
 style={{ height:100 }}
 ```
 - 外联
-```
+```javascript
 style={ styles.btn }
 ```
 - 综合
-```
+```javascript
 style={{ ...styles.btn, margin:10 }}
 或
 style={[ styles.btn, { margin:10 } ]}
@@ -161,6 +161,7 @@ alignItems | `flex-start`, `flex-end`, `center`, `stretch` | 对应 `CSS` `align
 alignSelf | `auto`, `flex-start`, `flex-end`, `center`, `stretch` | 对应 `CSS` `align-self` 属性，但阉割了 `baseline` 取值
 
 ### Other 其他
+
 属性名 | 取值 | 描述
 ---|---|---
 opacity | [&lt;number&gt;](#user-content-number) | 对应 `CSS` `opacity` 属性
