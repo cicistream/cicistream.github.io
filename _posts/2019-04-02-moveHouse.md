@@ -4,7 +4,7 @@ title: "租房搬家攻略&大型安利现场"
 subtitle: "记我第一次自己找房子的血泪经验"
 date:  2019-04-02
 author: "cici"
-header-img: "img/home-bg.jpg"
+header-img: "img/in-post/post-move/4.jpg"
 tags:
   - life
   - moveHouse
