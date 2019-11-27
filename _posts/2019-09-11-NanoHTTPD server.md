@@ -1,8 +1,3 @@
-<!--
- * @Descripttion: 
- * @Author: Cici
- * @Date: 2019-09-11 10:29:08
- -->
 ---
 layout: post
 title: "React-Native局域网内跨平台互传文件"
@@ -43,22 +38,22 @@ tags:
  WifiManager是 Android 暴露给开发者使用的一个系统服务管理类, 其中包含对WiFi的响应的操作函数。
 
 ```java
-        //获取wifi服务
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        //判断wifi是否开启
-        if (!wifiManager.isWifiEnabled()) {
-            return null;
-        }
-        //判断wifi是否连接
-        if (wifiManager.getConnectionInfo() == null) {
-            return null;
-        }
-        // ip地址获取
+    //获取wifi服务
+    WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    //判断wifi是否开启
+    if (!wifiManager.isWifiEnabled()) {
+        return null;
+    }
+    //判断wifi是否连接
+    if (wifiManager.getConnectionInfo() == null) {
+        return null;
+    }
+    // ip地址获取
 int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
-        return (ipAddress & 0xFF) + "." +
-                ((ipAddress >> 8) & 0xFF) + "." +
-                ((ipAddress >> 16) & 0xFF) + "." +
-                (ipAddress >> 24 & 0xFF);
+    return (ipAddress & 0xFF) + "." +
+            ((ipAddress >> 8) & 0xFF) + "." +
+            ((ipAddress >> 16) & 0xFF) + "." +
+            (ipAddress >> 24 & 0xFF);
 
 ```
 
@@ -162,22 +157,22 @@ private Response renderRes(IHTTPSession session) {
 ###  validatecode 验证验证码
 
 ```java
-            session.parseBody(files);
-            String param=files.get("postData");
-            JSONObject json = new JSONObject(param);
-            String code = json.getString("code");
-            if (code.equals(this.code+"")){
-                Map map = new HashMap();
-                map.put("validate",true);
-                map.put("toPage",this.toPage);
-                JSONObject jsonObj=new JSONObject(map);
-                return newFixedLengthResponse(Response.Status.OK, "text/plain", jsonObj.toString());
-            }else {
-                Map map = new HashMap();
-                map.put("validate",false);
-                JSONObject jsonObj=new JSONObject(map);
-                return newFixedLengthResponse(Response.Status.REDIRECT_SEE_OTHER, "text/plain", jsonObj.toString());
-            }
+    session.parseBody(files);
+    String param=files.get("postData");
+    JSONObject json = new JSONObject(param);
+    String code = json.getString("code");
+    if (code.equals(this.code+"")){
+        Map map = new HashMap();
+        map.put("validate",true);
+        map.put("toPage",this.toPage);
+        JSONObject jsonObj=new JSONObject(map);
+        return newFixedLengthResponse(Response.Status.OK, "text/plain", jsonObj.toString());
+    }else {
+        Map map = new HashMap();
+        map.put("validate",false);
+        JSONObject jsonObj=new JSONObject(map);
+        return newFixedLengthResponse(Response.Status.REDIRECT_SEE_OTHER, "text/plain", jsonObj.toString());
+    }
 
 ```
 
@@ -187,46 +182,46 @@ private Response renderRes(IHTTPSession session) {
 
 ```java
 private Response downloadKey(IHTTPSession session) {
-        try {
-            File distFile = new File(this.context.getFilesDir().getAbsolutePath() + File.separatorChar + "wifi" + File.separatorChar + this.mainKey.getString("key_name") + ".json");
-            //判断该文件的所属文件夹存不存在，不存在则创建文件夹
-            if(!distFile.getParentFile().exists()){
-                distFile.getParentFile().mkdirs();
-            }
-            //创建文件
-            if (!distFile.exists()){
-                //如果不存在file文件，则创建
-                distFile.createNewFile();
-            }
-            //创建字符流（使用字节流比较麻烦）
-            FileWriter fw = new FileWriter(distFile);
-            Map map = new HashMap();
-            map.put("address",this.mainKey.getString("pubaddress"));
-            map.put("algo","0x03");
-            map.put("encrypted",this.mainKey.getString("privateKeystr").substring(2,this.mainKey.getString("privateKeystr").length()));
-            map.put("version","2.0");
-            map.put("privateKeyEncrypted",false);
-            JSONObject jsonObj=new JSONObject(map);
-
-            fw.write(jsonObj.toString());
-            //这里要说明一下，write方法是写入缓存区，并没有写进file文件里面，要使用flush方法才写进去
-            fw.flush();
-            //关闭资源
-            fw.close();
-            FileInputStream fis = new FileInputStream(distFile.getPath());
-            return newFixedLengthResponse(Response.Status.OK, "application/octet-stream", fis,fis.available());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", e.getMessage());
+    try {
+        File distFile = new File(this.context.getFilesDir().getAbsolutePath() + File.separatorChar + "wifi" + File.separatorChar + this.mainKey.getString("key_name") + ".json");
+        //判断该文件的所属文件夹存不存在，不存在则创建文件夹
+        if(!distFile.getParentFile().exists()){
+            distFile.getParentFile().mkdirs();
         }
+        //创建文件
+        if (!distFile.exists()){
+            //如果不存在file文件，则创建
+            distFile.createNewFile();
+        }
+        //创建字符流（使用字节流比较麻烦）
+        FileWriter fw = new FileWriter(distFile);
+        Map map = new HashMap();
+        map.put("address",this.mainKey.getString("pubaddress"));
+        map.put("algo","0x03");
+        map.put("encrypted",this.mainKey.getString("privateKeystr").substring(2,this.mainKey.getString("privateKeystr").length()));
+        map.put("version","2.0");
+        map.put("privateKeyEncrypted",false);
+        JSONObject jsonObj=new JSONObject(map);
 
+        fw.write(jsonObj.toString());
+        //这里要说明一下，write方法是写入缓存区，并没有写进file文件里面，要使用flush方法才写进去
+        fw.flush();
+        //关闭资源
+        fw.close();
+        FileInputStream fis = new FileInputStream(distFile.getPath());
+        return newFixedLengthResponse(Response.Status.OK, "application/octet-stream", fis,fis.available());
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+        return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", e.getMessage());
+    } catch (IOException e) {
+        e.printStackTrace();
+        return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", e.getMessage());
+    } catch (Exception e) {
+        e.printStackTrace();
+        return newFixedLengthResponse(Response.Status.BAD_REQUEST, "text/plain", e.getMessage());
     }
+
+}
 ```
 
 ###  upload  从PC端下载文件
@@ -234,29 +229,29 @@ private Response downloadKey(IHTTPSession session) {
 ```java
 private void sendUploadFileToClient(IHTTPSession session) throws IOException, ResponseException {
 
-        Map<String, String> files = new HashMap<>();
-        session.parseBody(files);
+    Map<String, String> files = new HashMap<>();
+    session.parseBody(files);
 
-        Map<String, List<String>> parameters = session.getParameters();
+    Map<String, List<String>> parameters = session.getParameters();
 
-        WritableArray params = Arguments.createArray();
-        String str = "";
-        for (String key : files.keySet()) {
-            List<String> nameStr = parameters.get(key);
-            if (nameStr == null) continue;
-            File tempFile = new File(files.get(key));
-            File distFile = new File(this.context.getFilesDir().getAbsolutePath() + File.separatorChar + "wifi" + File.separatorChar + tempFile.getName());
+    WritableArray params = Arguments.createArray();
+    String str = "";
+    for (String key : files.keySet()) {
+        List<String> nameStr = parameters.get(key);
+        if (nameStr == null) continue;
+        File tempFile = new File(files.get(key));
+        File distFile = new File(this.context.getFilesDir().getAbsolutePath() + File.separatorChar + "wifi" + File.separatorChar + tempFile.getName());
 
-            Utils.copyFile(tempFile, distFile);//NanoHttpd 会自动在请求完毕删除掉文件 所以克隆一份
+        Utils.copyFile(tempFile, distFile);//NanoHttpd 会自动在请求完毕删除掉文件 所以克隆一份
 
-            WritableMap map = Arguments.createMap();
-            map.putString("name", nameStr.get(0));
-            map.putString("path", distFile.getPath());
-            params.pushMap(map);
-            str = this.readTxt(distFile.getPath());
-        }
-// 页面监听WifiServer.FILE_UPLOAD_NEW事件，接收从PC导入的数据
-this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(WifiServer.FILE_UPLOAD_NEW, str);
+        WritableMap map = Arguments.createMap();
+        map.putString("name", nameStr.get(0));
+        map.putString("path", distFile.getPath());
+        params.pushMap(map);
+        str = this.readTxt(distFile.getPath());
+    }
+    // 页面监听WifiServer.FILE_UPLOAD_NEW事件，接收从PC导入的数据
+    this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(WifiServer.FILE_UPLOAD_NEW, str);
     }
     private  String readTxt(String filePath) {
         StringBuilder result = new StringBuilder();
