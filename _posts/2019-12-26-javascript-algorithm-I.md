@@ -4,7 +4,7 @@ title: "经典算法解 · 最大子序合（贪心·分治·动态规划）"
 subtitle: "给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。"
 date:  2019-12-26
 author: "cici"
-header-img: "img/post-bg-rwd.jpg"
+header-img: "img/post-bg-js-version.jpg"
 tags:
   - JavaScript
   - algorithm
