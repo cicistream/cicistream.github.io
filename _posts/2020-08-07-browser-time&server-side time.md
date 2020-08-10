@@ -4,7 +4,7 @@ title: "如何保持datePicker与服务器时间一致"
 subtitle: "避免用户修改系统时间导致的时间组件bug"
 date:  2020-08-07
 author: "cici"
-header-img: "img/browser-time.jpeg"
+header-img: "img/browser-time.png"
 tags:
   - React
   - antd
