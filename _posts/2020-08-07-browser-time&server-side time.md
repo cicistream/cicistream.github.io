@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2020-08-10 10:40:16
- * @LastEditTime: 2020-08-10 10:56:28
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /cicistream.github.io/_posts/2020-08-07-server-side-time&client-side-time.md
--->
 ---
 layout: post
 title: "如何保持datePicker与服务器时间一致"
